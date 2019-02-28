@@ -1,0 +1,5 @@
+Bundle-Name: my-npm-angular-portlet
+Bundle-SymbolicName: com.liferay.npm.angular
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.npm.angular.constants
+Web-ContextPath: /my-npm-angular-portlet
