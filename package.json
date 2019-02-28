@@ -62,7 +62,7 @@
 	"main": "lib/angular-loader.js",
 	"name": "my-npm-angular-portlet",
 	"scripts": {
-		"build": "tsc && liferay-npm-bundler"
+		"build": "tsc && liferay-npm-bundler && grunt uglify"
 	},
 	"version": "1.0.0"
 }
