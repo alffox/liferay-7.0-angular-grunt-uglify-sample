@@ -52,7 +52,7 @@ The project is created to show in a Github-fashion way the necessary changes to 
 
 1) Get your local copy of Liferay 7.0 Angular sample: https://dev.liferay.com/develop/reference/-/knowledge_base/7-0/npm-angular-portlet-template
 
-2) Apply the changes showing in all commits here: https://github.com/alffox/liferay-7.0-angular-grunt-uglify-sample/commits/master except the one with message: ["First commit"](https://github.com/alffox/liferay-7.0-angular-grunt-uglify-sample/commit/be8c126b83197b3a9b5f0e99c62288b3a597c44f)
+2) Apply the commits with prefix `chore` showing here: https://github.com/alffox/liferay-7.0-angular-grunt-uglify-sample/commits/master except the one with message: ["First commit"](https://github.com/alffox/liferay-7.0-angular-grunt-uglify-sample/commit/be8c126b83197b3a9b5f0e99c62288b3a597c44f)
 
 3) From the portlet's root, run ./gradlew build
 
