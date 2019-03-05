@@ -52,8 +52,72 @@ The project is created to show in a Github-fashion way the necessary changes to 
 
 1) Get your local copy of Liferay 7.0 Angular sample: https://dev.liferay.com/develop/reference/-/knowledge_base/7-0/npm-angular-portlet-template
 
-2) Apply the commits with prefix `chore` in the commit messages showing here: https://github.com/alffox/liferay-7.0-angular-grunt-uglify-sample/commits/master except the one with message: ["First commit"](https://github.com/alffox/liferay-7.0-angular-grunt-uglify-sample/commit/be8c126b83197b3a9b5f0e99c62288b3a597c44f)
+2) Run the following commands from the portlet root:
 
-3) From the portlet's root, run ./gradlew build
+```
+npm install grunt --save-dev
+npm install grunt-contrib-uglify --save-dev
+```
 
-4) Deploy the .jar module created at ../build/libs into your Liferay 7.0 and add it to a page, the portlet should render and properly work
+3) Add a new file called **Gruntfile.js** to the root of the portlet. The content:
+
+```
+module.exports = function(grunt) {
+
+  // Project configuration.
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    uglify: {
+      options: {
+
+      },
+      build: {
+        files: [{
+            expand: true,
+            src: ['build/resources/main/META-INF/resources/**/*.js',
+                '!build/**/*.es5.js',
+                '!build/**/*.es6.js',
+                '!build/**/index.js',
+                '!build/**/lodash.js',
+                '!build/**/loading.component.js',
+                '!build/**/esm2015/**/*.js',
+                '!build/**/_esm2015/**/*.js',
+                '!build/**/locales/**/*.js',
+                '!build/**/src/**/*.js',
+                '!build/**/esm5/**/*.js',
+                '!build/**/es/**/*.js',
+                '!build/**/_esm5/**/*.js',
+                '!build/**/@ngx-translate/**/core.js'],
+            dest: 'build/resources/main/META-INF/resources/',
+            cwd: '.',
+            rename: function (dst, src) {
+                // To keep src js files and make new files as *.min.js :
+                // return dst + '/' + src.replace('.js', '.min.js');
+                // Or to override to src :
+                return src;
+            }
+        }]
+    }
+    }
+  });
+
+  // Load the plugin that provides the "uglify" task.
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+
+  // Default task(s).
+  grunt.registerTask('default', ['uglify']);
+
+};
+```
+
+4) Add the _uglify_ task into the of **package.json** scripts through `&& grunt uglify`, for example:
+
+```
+"scripts": {
+		"build": "tsc && liferay-npm-bundler && grunt uglify"
+	},
+```
+
+5) From the portlet's root, run ./gradlew build
+
+6) Deploy the .jar module created at ../build/libs into your Liferay 7.0 and add it to a page, the portlet should render and properly work
